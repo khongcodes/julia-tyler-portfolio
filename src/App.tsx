@@ -1,20 +1,43 @@
-// NOTES
-//////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////                                                               NOTES
 
-// IMPORTS
-//////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////                                                             IMPORTS
+// 1. React
+// 2. Components
+// 3. Lazy imports
 
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import Layout from "./components/Layout";
+import BookDesign from "./views/BookDesign";
+import PageNotFound from "./views/PageNotFound";
+
+const About = lazy(() => import("./views/About"));
 
 
-// COMPONENTS & LOGIC
-//////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////                                                               SETUP
 
-function App() {
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////                                                  COMPONENTS & LOGIC
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      hello world
-    </div>
+    <Layout>
+      <Suspense fallback={<div/>}>
+        <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<BookDesign />} />
+          <Route path="/book-design" element={<Navigate to="/" />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<PageNotFound />}/>
+        </Routes>
+        </BrowserRouter>
+      </Suspense>
+    </Layout>
   );
 }
 
