@@ -26,18 +26,19 @@ const About = lazy(() => import("./views/About"));
 
 const App: React.FC = () => {
   return (
-    <Layout>
+    
       <Suspense fallback={<div/>}>
         <BrowserRouter>
+        <Layout>
         <Routes>
           <Route path="/" element={<BookDesign />} />
           <Route path="/book-design" element={<Navigate to="/" />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<PageNotFound />}/>
         </Routes>
+        </Layout>
         </BrowserRouter>
       </Suspense>
-    </Layout>
   );
 }
 

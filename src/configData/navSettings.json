@@ -1,0 +1,16 @@
+{
+  "activeLinks": [
+    {
+      "text": "Book Design",
+      "path": "/"
+    },
+    {
+      "text": "Personal Work",
+      "path": "/personal-work"
+    },
+    {
+      "text": "About",
+      "path": "/about"
+    }
+  ]
+}
