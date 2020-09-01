@@ -38,14 +38,22 @@ const Nav = () => {
     <div id={layoutStyles.navContainer}>
         
       <Link to="/" >
-        <img src={logo} alt="Julia Tyler logo"/>
+        <img 
+          className={layoutStyles.navLogo}
+          src={logo}
+          alt="Julia Tyler logo"
+        />
       </Link>
 
-      {settings.activeLinks.map(link => 
-        <Link to={link.path}>
-          {link.text}
-        </Link>
-      )}
+      <ul className={layoutStyles.linkList}>
+        {settings.activeLinks.map(link => 
+          <li>
+            <Link to={link.path}>
+              {link.text}
+            </Link>
+          </li>
+        )}
+      </ul>
 
     </div>
   )
