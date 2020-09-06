@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import navSettings from "../configData/navSettings.json";
+import navSettingsData from "../configData/navSettings.json";
 
 import logo from "../assets/images/logo.png";
 
@@ -28,11 +28,14 @@ type NavSettingsType = {
   }>;
 };
 
+type NavSettingsSubscriber = {
+  navSettings: NavSettingsType;
+}
+
 /////////////////////////////////////////////////////////////////////////////////
 /////////////                                                  COMPONENTS & LOGIC
 
-const Nav = () => {
-  const settings: NavSettingsType = navSettings;
+const Nav: React.FC<NavSettingsSubscriber> = ({ navSettings }) => {
   
   return (
     <div id={layoutStyles.navContainer}>
@@ -46,7 +49,7 @@ const Nav = () => {
       </Link>
 
       <ul className={layoutStyles.linkList}>
-        {settings.activeLinks.map(link => 
+        {navSettings.activeLinks.map(link => 
           <li>
             <Link to={link.path}>
               {link.text}
@@ -59,15 +62,33 @@ const Nav = () => {
   )
 }
 
+const MobileMenuDrawer: React.FC<NavSettingsSubscriber> = ({ navSettings }) => {
+  return (
+    <div id={layoutStyles.mobileMenuDrawerContainer}>
+      
+      <ul className={layoutStyles.linkList}>
+        {navSettings.activeLinks.map(link => 
+          <li>
+            <Link to={link.path}>
+              {link.text}
+            </Link>
+          </li>
+        )}
+      </ul>
+      
+    </div>
+  )
+}
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const navSettings: NavSettingsType = navSettingsData;
+
   return (
     <div id={layoutStyles.layoutRoot}>
-      <div id={layoutStyles.mobileMenuDrawerContainer}>
-
-      </div>
+      <MobileMenuDrawer navSettings={navSettings}/>
 
       <div id={layoutStyles.mainAppContainer}>
-        <Nav />
+        <Nav navSettings={navSettings} />
         {children}
       </div>
     </div>

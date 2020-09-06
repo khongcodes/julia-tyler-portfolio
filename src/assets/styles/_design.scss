@@ -11,8 +11,8 @@
 
 $breakpoint-a: 788px;
 
-@mixin mobile-media {
-  @media (max-width: $mobile-breakpoint) {
+@mixin breakpoint-a {
+  @media (max-width: $breakpoint-a) {
     @content;
   }
 }
